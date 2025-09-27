@@ -129,7 +129,7 @@ export default function TypeMeter() {
       let className = "text-gray-400";
       if (typedChar !== undefined) {
         className =
-          typedChar === ch ? "text-green-400" : "text-red-400 line-through";
+          typedChar === ch ? theme === "dark"? "text-green-400":"text-blue-400" : "text-red-400 line-through";
       }
       return (
         <span key={i} className={`whitespace-pre-wrap ${className}`}>
@@ -145,6 +145,7 @@ export default function TypeMeter() {
         <meta property="og:title" content="TypeMeter" key="title" />
       </Head>
       <div
+      suppressHydrationWarning
         className={`min-h-screen flex items-center justify-center p-6 ${
           theme === "dark" ? "bg-gray-900" : "bg-gray-100"
         }`}
@@ -214,19 +215,19 @@ export default function TypeMeter() {
           <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex gap-6 items-center">
               <div className="text-sm">
-                <div>WPM</div>
+                <div className={`${theme === "dark" ? "text-white" : "text-gray-900"}`}>WPM</div>
                 <div className={`text-2xl font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{wpm}</div>
               </div>
               <div className="text-sm">
-                <div>Accuracy</div>
+                <div className={`${theme === "dark" ? "text-white" : "text-gray-900"}`}>Accuracy</div>
                 <div className={`text-2xl font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{accuracy}%</div>
               </div>
               <div className="text-sm">
-                <div>Wrong %</div>
+                <div className={`text-red-400`}>Wrong %</div>
                 <div className="text-2xl font-semibold text-red-400">{wrongPercent}%</div>
               </div>
               <div className="text-sm">
-                <div>Typed</div>
+                <div className={`${theme === "dark" ? "text-white" : "text-gray-900"}`}>Typed</div>
                 <div className={`text-lg font-medium ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{input.length} chars</div>
               </div>
             </div>
@@ -254,7 +255,7 @@ export default function TypeMeter() {
 
           {/* Completion */}
           {isFinished && !loading && (
-            <div className="mt-4 p-4 rounded-lg border text-green-200" style={{ backgroundColor: theme === "dark" ? "rgba(22,163,74,0.2)" : "rgba(134,239,172,0.3)", borderColor: theme === "dark" ? "#16a34a" : "#a7f3d0" }}>
+            <div className="mt-4 p-4 rounded-lg border text-green-200" style={{ backgroundColor: theme === "dark" ? "rgba(22,163,74,0.2)" : "rgba(0, 0, 0, 0.3)", borderColor: theme === "dark" ? "#16a34a" : "#000000ff", color: theme === "dark" ? "#16a34a" : "#000000ff" }}>
               <strong>Test Complete</strong>
               <div className="mt-2">Final WPM: <span className="font-semibold">{wpm}</span></div>
               <div>Final Accuracy: <span className="font-semibold">{accuracy}%</span></div>
